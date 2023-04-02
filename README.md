@@ -2,6 +2,7 @@
 A Note Taking Website Using MERN Stack
 
 [LIVE WEBSITE] - https://notify-mern.netlify.app/
+
 [BACKEND SERVER REPOSITORY] - https://github.com/pranavdeshmukh04/notify-backend
 
 ## FEATURES
