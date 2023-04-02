@@ -3,8 +3,9 @@ import React, {useState} from 'react'
 import TextField from '@mui/material/TextField';
 import Button from '@mui/material/Button';
 import API from '../api/api'
-import Backdrop from '@mui/material/Backdrop';
-import CircularProgress from '@mui/material/CircularProgress';
+import Loading from './Loading'
+import HashLoader from "react-spinners/HashLoader";
+
 export default function Login({setIsLogin}) {
     const [user, setUser] = useState({name: '',email: '',password: '' })
     const [err, setErr] = useState('')
@@ -70,13 +71,13 @@ export default function Login({setIsLogin}) {
                     
                     <div className="login-button">
                         <Button variant="outlined" type="submit" size="large" sx={{ borderColor: 'black', color: 'black' }}>
-                            {loading ? <CircularProgress size={20} /> : "Login"}
-                            {/* {loading ? <Backdrop
-                                sx={{ color: '#fff', zIndex: (theme) => theme.zIndex.drawer + 1 }}
-                                open
-                            >
-                                <CircularProgress color="inherit" />
-                            </Backdrop>: "Login"} */}
+                            {loading ? <HashLoader
+                                        color="#33b69c"
+                                        speedMultiplier={1}
+                                        size={30}
+                                        aria-label="Loading Spinner"
+                                        data-testid="loader"
+                                    />  : "Login"}
                         </Button>
                     </div>
                     <p className="login-button row">You don't have an account? &nbsp;

@@ -3,6 +3,7 @@ import React, {useState, useEffect} from 'react';
 import Login from './components/Login'
 import Notes from './components/Notes'
 import API from './api/api'
+import Loading from './components/Loading'
 
 function App() {
   const [isLogin, setIsLogin] = useState(false)
@@ -31,6 +32,7 @@ function App() {
         ? <Notes setIsLogin={setIsLogin} /> 
         : <Login setIsLogin={setIsLogin} />
       }
+      {/* <Loading /> */}
     </div>
   );
 }
