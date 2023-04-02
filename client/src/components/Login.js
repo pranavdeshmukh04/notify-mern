@@ -3,9 +3,12 @@ import React, {useState} from 'react'
 import TextField from '@mui/material/TextField';
 import Button from '@mui/material/Button';
 import API from '../api/api'
+import Backdrop from '@mui/material/Backdrop';
+import CircularProgress from '@mui/material/CircularProgress';
 export default function Login({setIsLogin}) {
     const [user, setUser] = useState({name: '',email: '',password: '' })
     const [err, setErr] = useState('')
+    const [loading, setLoading] = useState(false);
 
     const onChangeInput = e =>{
         const {name, value} = e.target;
@@ -30,6 +33,7 @@ export default function Login({setIsLogin}) {
 
     const loginSubmit = async e =>{
         e.preventDefault()
+        setLoading(true);
         try {
             const res = await API.post('/users/login',{
                 email: user.email,
@@ -41,6 +45,7 @@ export default function Login({setIsLogin}) {
         } catch (err) {
             err.response.data.msg && setErr(err.response.data.msg)
         }
+        setLoading(false);
     }
 
     const [onLogin, setOnLogin] = useState(false)
@@ -64,7 +69,15 @@ export default function Login({setIsLogin}) {
                     </div>
                     
                     <div className="login-button">
-                        <Button variant="outlined" type="submit" size="large" sx={{ borderColor: 'black', color: 'black' }}>Login</Button>
+                        <Button variant="outlined" type="submit" size="large" sx={{ borderColor: 'black', color: 'black' }}>
+                            {loading ? <CircularProgress size={20} /> : "Login"}
+                            {/* {loading ? <Backdrop
+                                sx={{ color: '#fff', zIndex: (theme) => theme.zIndex.drawer + 1 }}
+                                open
+                            >
+                                <CircularProgress color="inherit" />
+                            </Backdrop>: "Login"} */}
+                        </Button>
                     </div>
                     <p className="login-button row">You don't have an account? &nbsp;
                         <span onClick={() => setOnLogin(true)}> Register Now</span>
