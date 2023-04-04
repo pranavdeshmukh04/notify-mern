@@ -13,7 +13,10 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
 }
+.App{
+  background-image: linear-gradient( 95.2deg, rgba(173,252,234,1) 26.8%, rgba(192,229,246,1) 64% );
 
+}
 .notes-page{
   max-width: 960px;
 	margin-right: auto;
@@ -21,6 +24,7 @@ code {
 	padding-right: 15px;
 	padding-left: 15px;
 	min-height: 100vh;
+  
 }
 .notes-page header{
   display: flex;
@@ -101,7 +105,8 @@ a{
   max-width: 500px;
   width: 100%;
   margin: auto;
-  background-color: #a9edf1;
+  background-color: #d999f6;
+  /* background-color: #a9edf1; */
   /* background-color: #9beee6; */
   border-radius: 4vh;
   padding: 30px;
