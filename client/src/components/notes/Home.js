@@ -4,10 +4,14 @@ import {format} from 'timeago.js'
 // import axios from 'axios'
 import DeleteForeverIcon from '@mui/icons-material/DeleteForever';
 import EditIcon from '@mui/icons-material/Edit';
+import BookmarkIcon from '@mui/icons-material/Bookmark';
+import BookmarkBorderOutlinedIcon from '@mui/icons-material/BookmarkBorderOutlined';
 import API from '../../api/api'
+
 export default function Home() {
     const [notes, setNotes] = useState([])
     const [token, setToken] = useState('')
+
     const getNotes = async (token) =>{
         const res = await API.get('api/notes', {
             headers:{Authorization: token}
@@ -35,6 +39,20 @@ export default function Home() {
             window.location.href = "/";
         }
     }
+    const handleBookmark = async (id) => {
+        try {
+            if (token) {
+                await API.put(`api/notes/${id}/bookmark`, null , {
+                        headers: { Authorization: token },
+                    }
+                );
+                getNotes(token);
+            }
+        } catch (error) {
+            console.error(error);
+        }
+    };
+
     return (
         <>
         <div className="note-wrapper">
@@ -56,6 +74,11 @@ export default function Home() {
                         </div>
                         <button className="close" 
                         onClick={() => deleteNote(note._id)} ><DeleteForeverIcon/></button>
+                        {note.bookmarked ? (
+                            <button className="bookmark" onClick={() => handleBookmark(note._id)}><BookmarkIcon/></button>
+                            ) : (
+                            <button className="bookmark" onClick={() => handleBookmark(note._id)}><BookmarkBorderOutlinedIcon/></button>
+                            )}
                     </div>
                 ))
             }
