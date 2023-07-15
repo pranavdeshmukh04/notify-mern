@@ -46,8 +46,12 @@ export default function Home() {
                             <p>{note.content}</p>
                         </div>
                         <div className="card-footer">
-                            
-                            <p className="date">{format(note.date)}</p>
+                            <p className="date">{new Date(note.date).toLocaleString('en-IN', {
+                                weekday: 'short',
+                                day: '2-digit',
+                                month: '2-digit',
+                                year: 'numeric',
+                            })}</p>
                             <Link to={`edit/${note._id}`} ><EditIcon/></Link>
                         </div>
                         <button className="close" 
