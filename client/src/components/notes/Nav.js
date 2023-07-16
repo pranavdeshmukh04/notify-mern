@@ -17,6 +17,7 @@ export default function Nav({setIsLogin}) {
       <ul>
         <li><Link to="/">HOME</Link></li>
         <li><Link to="/create">CREATE NOTE</Link></li>
+        <li><Link to="/bookmarks">BOOKMARKS</Link></li>
         <li onClick={logoutSubmit}><Link to="/">LOGOUT</Link></li>
       </ul>
     </header>

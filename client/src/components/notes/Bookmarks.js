@@ -7,21 +7,22 @@ import BookmarkBorderOutlinedIcon from '@mui/icons-material/BookmarkBorderOutlin
 import API from '../../api/api'
 
 export default function Home() {
-    const [notes, setNotes] = useState([])
+    const [bookmarkedNotes, setBookmarkedNotes] = useState([])
     const [token, setToken] = useState('')
 
-    const getNotes = async (token) =>{
-        const res = await API.get('api/notes', {
+    const getBookmarkedNotes = async (token) =>{
+        const res = await API.get('api/notes/bookmarks', {
             headers:{Authorization: token}
         })
-        setNotes(res.data)
+        console.log(res.data)
+        setBookmarkedNotes(res.data)
     }
-
+    
     useEffect(() =>{
         const token = localStorage.getItem('tokenStore')
         setToken(token)
         if(token){
-            getNotes(token)
+            getBookmarkedNotes(token)
         }
     }, [])
 
@@ -31,7 +32,7 @@ export default function Home() {
                 await API.delete(`api/notes/${id}`, {
                     headers: {Authorization: token}
                 })
-                getNotes(token)
+                getBookmarkedNotes(token)
             }
         } catch (error) {
             window.location.href = "/";
@@ -44,7 +45,7 @@ export default function Home() {
                         headers: { Authorization: token },
                     }
                 );
-                getNotes(token);
+                getBookmarkedNotes(token);
             }
         } catch (error) {
             console.error(error);
@@ -55,7 +56,7 @@ export default function Home() {
         <>
         <div className="note-wrapper">
             {
-                notes.map(note =>(
+                bookmarkedNotes.map(note =>(
                     <div className="card" key={note._id}>
                         <h4 title={note.title}>{note.title}</h4>
                         <div className="text-wrapper">
@@ -84,3 +85,4 @@ export default function Home() {
         </>
     )
 }
+

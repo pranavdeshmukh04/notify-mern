@@ -6,6 +6,7 @@ import API from '../api/api'
 import Loading from './Loading'
 import HashLoader from "react-spinners/HashLoader";
 
+
 export default function Login({setIsLogin}) {
     const [user, setUser] = useState({name: '',email: '',password: '' })
     const [err, setErr] = useState('')
@@ -54,7 +55,6 @@ export default function Login({setIsLogin}) {
         visibility: onLogin ? "visible" : "hidden",
         opacity: onLogin ? 1 : 0
     }
-
     return (
        <section className="login-page">
            <div className="login create-note" >  
